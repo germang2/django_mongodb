@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'django_mongodb.wsgi.application'
 
 DATABASES = {
    'default' : {
-      'ENGINE' : 'djongo',
-      'NAME' : 'django_mongodb'
+        'ENGINE': 'djongo',
+        'ENFORCE_SCHEMA': True,
+        'NAME': 'django_mongodb',
+        'HOST': 'db',
+        'PORT': 27017,
+        'USER': 'root',
+        'PASSWORD': 'mongoadmin',
    }
 }
 
