@@ -22,7 +22,12 @@ class CustomUserSerializer(serializers.Serializer):
 
     """ validate that the user is unique, validating email """
     def create(self, validated_data):
-        email = value['email']
+        email = validated_data['user']['email']
+        if User.objects.filter(email=email).exists():
+            ctx = {
+                'email': ['This email already exists']
+            }
+            raise serializers.ValidationError(ctx)
         user = User.objects.create(
             username=validated_data['user']['email'],
             email=validated_data['user']['email'],
@@ -38,6 +43,11 @@ class CustomUserSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """ Validate that email doesn't exists in another user """
         email = validated_data['user']['email']
+        if CustomUser.objects.filter(user__email=email).exclude(pk=instance.id).exists():
+            ctx = {
+                'email': ['This email already exists']
+            }
+            raise serializers.ValidationError(ctx)
         user_instance = instance.user
         user = validated_data['user']
         user_instance.first_name = user['first_name']
