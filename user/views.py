@@ -31,5 +31,4 @@ class UserViewSet(viewsets.ModelViewSet):
 
         page = self.paginate_queryset(queryset)
         serializer = CustomUserSerializer(queryset, many=True)
-            
         return self.get_paginated_response(serializer.data)

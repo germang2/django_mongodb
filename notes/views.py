@@ -19,7 +19,4 @@ def notes_user(request, id):
     """
     notes = Notes.objects.filter(custom_user=id)
     serializer = NotesSerializer(notes, many=True)
-    if len(notes) > 0:
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
-    else:
-        return Response(data=serializer.data, status=status.HTTP_404_NOT_FOUND)
+    return Response(data=serializer.data, status=status.HTTP_200_OK)
