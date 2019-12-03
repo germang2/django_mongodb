@@ -47,7 +47,7 @@ DATABASES = {
    }
 }
 ```
-Last setp. Run the server
+Last step. Run the server
 ```
 python manage.py runserver
 ```
